@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Important Tasks</title>
+		<link rel="shortcut icon" href="favicon.ico" />
+		<link rel="stylesheet" href="font-awesome.min.css" />
+		<link rel="stylesheet" href="normalize.css" />
+		<link rel="stylesheet" href="style.css" />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;900&display=swap"
+			rel="stylesheet"
+		/>
+	</head>
+	<body>
+    <main>
+		<div class="bodyCont">
+
+			<div class="mainListCont">
+				<section class="listControls">
+					<p class="remainingTodos"></p>
+					<button class="clearCompleteBtn controlBtn">Clear Completed</button>
+					<button class="clearListBtn controlBtn">Clear All</button>
+				</section>
+
+				<div class="listCont">
+					<section class="addItem">
+						<form action="/todo" method="POST">
+							<!-- <input type="checkbox" name="status" /> -->
+							<input
+								class="userInput"
+								type="text"
+								placeholder="Enter Tasks"
+								name="todo"
+							/>
+							<button type="submit" class="submitBtn controlBtn">Add Item</button>
+						</form>
+					</section>
+
+					<div class="todoListCont">
+						<ul class="todos todoList">
+							<% todos.forEach((message)=>{ %>
+							<li class="message">
+								<input
+									type="checkbox"
+									name="status"
+									class="status checkbox"
+									value="<%=message.status%>"
+									id="<%=message._id%>"
+								/>
+								<label class="todoItem" for="<%=message._id%>"
+									><%=message.todo%></label
+								>
+								<span><i class="fa fa-trash" aria-hidden="true"></i></span>
+							</li>
+							<% }) %>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="main.js"></script>
+    </main>
+	</body>
+</html>
