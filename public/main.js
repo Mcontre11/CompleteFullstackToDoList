@@ -14,15 +14,14 @@ Array.from(thumbUp).forEach(function (element) {
 		const todoItem = this.parentNode.childNodes[3];
 		const todo = this.parentNode.childNodes[3].innerText;
 		const status = this.parentNode.childNodes[1];
-		console.log(todo);
+		console.log(todo,this.id);
 		if (status.value === 'incomplete') {
 			console.log('changing to complete');
-			fetch('upVote', {
+			fetch('completeToDo', {
 				method: 'put',
 				headers: { 'Content-Type': 'application/json' },
 				body: JSON.stringify({
-					todo: todo,
-					status: status.value,
+					id: this.id,
 				}),
 			})
 				.then(response => {

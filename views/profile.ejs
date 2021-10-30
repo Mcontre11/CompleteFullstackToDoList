@@ -14,6 +14,7 @@
 	</head>
 	<body>
     <main>
+			<h1> Stay On Track </h1>
 		<div class="bodyCont">
 
 			<div class="mainListCont">
@@ -39,19 +40,19 @@
 
 					<div class="todoListCont">
 						<ul class="todos todoList">
-							<% todos.forEach((message)=>{ %>
-							<li class="message">
+							<% todos.forEach((todo)=>{ %>
+							<li class="todo">
 								<input
 									type="checkbox"
 									name="status"
 									class="status checkbox"
-									value="<%=message.status%>"
-									id="<%=message._id%>"
+									value="<%=todo.status%>"
+									id="<%=todo._id%>"
 								/>
-								<label class="todoItem" for="<%=message._id%>"
-									><%=message.todo%></label
+								<label class="todoItem" for="<%=todo._id%>"
+									><%=todo.todo%></label
 								>
-								<span><i class="fa fa-trash" aria-hidden="true"></i></span>
+								<span><i id="<%=todo._id%>" class="fa fa-trash" aria-hidden="true"></i></span>
 							</li>
 							<% }) %>
 						</ul>

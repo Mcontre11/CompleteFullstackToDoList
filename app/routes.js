@@ -1,4 +1,7 @@
 module.exports = function(app, passport, db) {
+// in order for a specific user data to show we need to declare the object id using  const Object ID which allows us to target the specific user's document we want to display 
+
+const	ObjectID = require('mongodb').ObjectID
 
 // normal routes ===============================================================
 
@@ -8,9 +11,11 @@ module.exports = function(app, passport, db) {
     });
 
     // PROFILE SECTION =========================
+		// we use this to look into the todo collecton from the DB and then using .find we are able to target the specific user's docuuments
     app.get('/profile', isLoggedIn, function(req, res) {
-        db.collection('todo').find().toArray((err, result) => {
+        db.collection('todo').find({user:req.user._id}).toArray((err, result) => {
           if (err) return console.log(err)
+	// we then added the specific id to the profile.js 
           res.render('profile.ejs', { todos: result });
           })
         })
@@ -28,6 +33,7 @@ app.post('/todo', (req, res) => {
 		{
 			todo: req.body.todo,
 			status: 'incomplete',
+			user: req.user._id 
 		},
 		(err, result) => {
 			if (err) return console.log(err);
@@ -38,10 +44,10 @@ app.post('/todo', (req, res) => {
 });
 
 
-app.put('/upVote', (req, res) => {
+app.put('/completeToDo', (req, res) => {
 	console.log(req.body.todo);
 	db.collection('todo').findOneAndUpdate(
-		{ todo: req.body.todo },
+		{ _id: ObjectID(req.body.id)},
 		{
 			$set: {
 				status: 'complete',
